@@ -1,7 +1,9 @@
 package com.Group9.view;
 
 import com.Group9.GameConstants;
+import com.Group9.model.Player;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,6 +25,9 @@ public class NewgameView {
                 if(validatenumberofPlayers(players)){
                     numberOfPlayers = players;
                     GameConstants.NUMBER_OF_PLAYERS = numberOfPlayers;
+                    ArrayList<Player> newGamePlayers = createPlayers(numberOfPlayers);
+
+                    //Boardview.displayGameBoard();
                     menurun = false;
                 }
                 else {
@@ -51,6 +56,20 @@ public class NewgameView {
         }
         return true;
 
+    }
+
+    //Function to create players at the start. The user is asked to input player names.
+    public static ArrayList<Player> createPlayers(int numofPlayers){
+        ArrayList<Player>gamePlayer = new ArrayList<Player>(numofPlayers);
+        Scanner input = new Scanner(System.in);
+
+        for (int i = 0 ; i < numofPlayers; i++){
+            System.out.println("Enter player" +i+1+ "name:");
+            String playerName = input.nextLine();
+            gamePlayer.add(new Player(playerName, 0,1,1500));
+
+        }
+        return gamePlayer;
     }
 
 

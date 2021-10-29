@@ -2,9 +2,16 @@ package com.Group9.model;
 
 public class Player {
     private String name;
-    private String money;
+    private double money;
     private int token;
     private double startingSalary;
+
+    public Player(String name, double money, int token, double startingSalary) {
+        this.name = name;
+        this.money = money;
+        this.token = token;
+        this.startingSalary = startingSalary;
+    }
 
     public String getName() {
         return name;
@@ -14,11 +21,11 @@ public class Player {
         this.name = name;
     }
 
-    public String getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -42,7 +49,7 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", money='" + money + '\'' +
+                ", money=" + money +
                 ", token=" + token +
                 ", startingSalary=" + startingSalary +
                 '}';
