@@ -1,6 +1,7 @@
 package com.Group9.view;
 
 import com.Group9.GameConstants;
+import com.Group9.controller.PlayerController;
 import com.Group9.model.Player;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class NewgameView {
     public static void runNewgameView() {
 
         boolean menurun=true;
+        boolean hasRoundEnded = false;
+        int roundNumber=1;
         Scanner input = new Scanner(System.in);
         showNewgameView();
         int players;
@@ -26,17 +29,35 @@ public class NewgameView {
                     numberOfPlayers = players;
                     GameConstants.NUMBER_OF_PLAYERS = numberOfPlayers;
                     ArrayList<Player> newGamePlayers = createPlayers(numberOfPlayers);
+                    while (!hasRoundEnded && roundNumber <= 100) {
 
-                    //Boardview.displayGameBoard();
-                    menurun = false;
+                        Playerview playerview = new Playerview();
+                        PlayerController playerController = new PlayerController(newGamePlayers, playerview, roundNumber);
+                        playerController.displayBoardView(roundNumber);
+                        playerController.displayUpdatedPlayerView();
+
+
+                        hasRoundEnded = playerController.startRound();
+                    }
+
+                    //if round is ended by player then show the Game menu again.
+                    if(hasRoundEnded){
+                        GameMenu.runGame();
+                    }
+
+                    menurun = false; // terminating condition
                 }
                 else {
                     System.out.println("Invalid number of players. Please enter a number between 2 and 6");
                 }
             }catch (InputMismatchException e){
                 System.out.println("Invalid Input. Please enter a integer between 2 and 6");
-
             }
+            input.nextLine(); // clean scanner buffer incase of wrong input type
+
+
+
+
         }
 
 
@@ -64,7 +85,7 @@ public class NewgameView {
         Scanner input = new Scanner(System.in);
 
         for (int i = 0 ; i < numofPlayers; i++){
-            System.out.println("Enter player" +i+1+ "name:");
+            System.out.printf("%s%d%s%n","Enter player",i+1," name:");
             String playerName = input.nextLine();
             gamePlayer.add(new Player(playerName, 0,1,1500));
 

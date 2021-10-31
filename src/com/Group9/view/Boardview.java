@@ -7,8 +7,15 @@ public class Boardview {
 
 
 
-    public static void displayGameBoard(){
-        playerview = new Playerview();
+    public static void displayGameBoard(int Round){
+        System.out.printf("%s%d%n","Round Number:",Round);
+        System.out.printf("%s","Player Number");
+        System.out.printf("%25s","Player Name");
+        System.out.printf("%30s","Player Money");
+        System.out.printf("%40s","Player Owned Property");
+        System.out.println();
+
+       // playerview = new Playerview();
 //        System.out.printf("%s","-------------------");
         //playerview.displayPlayerView();
 //        System.out.printf("%s%n","|11 12 13 14 15 16|");
